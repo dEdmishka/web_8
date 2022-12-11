@@ -1,0 +1,21 @@
+<div class="list current">
+    <div v-if="currentProfessor">
+      <h4>Professor</h4>
+      <div class="">
+        <label for=""><strong>Name:</strong></label> {{ currentProfessor.p_name }}
+      </div>
+      <div class="">
+        <label for=""><strong>Email:</strong></label> {{ currentProfessor.p_email }}
+      </div>
+      <div class="">
+        <label for=""><strong>Password:</strong></label> {{ currentProfessor.p_password }}
+      </div>
+
+      <router-link :to="'/professors/' + currentProfessor.id_p" class="badge">Edit</router-link>
+    </div>
+
+    <div v-else>
+      <br/>
+      <p>Please click on professor...</p>
+    </div>
+  </div>
