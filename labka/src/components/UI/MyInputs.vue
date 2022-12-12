@@ -11,7 +11,7 @@
 <script>
 export default {
   props: {
-    modelValue: [String, Number]
+    modelValue: [String, Number, Date]
   },
   methods: {
     updateInput(event){

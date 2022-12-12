@@ -5,28 +5,32 @@
       <form action="">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" id="name"
-            v-model="currentProfessor.name"
+          <my-inputs
+              id="name"
+              v-model="currentProfessor.name"
           />
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="text" class="form-control" id="email"
-                 v-model="currentProfessor.email"
+          <my-inputs
+              id="email"
+              v-model="currentProfessor.email"
           />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="text" class="form-control" id="password"
-                 v-model="currentProfessor.password"
+          <my-inputs
+              id="password"
+              v-model="currentProfessor.password"
           />
         </div>
         <router-link to="/professors">Back</router-link>
-        <button type="submit" class="btn btn-submit"
+
+        <my-buttons type="submit" class="btn btn-submit"
           @click="updateProfessor"
         >
           Update
-        </button>
+        </my-buttons>
       </form>
     </div>
 
@@ -35,8 +39,14 @@
 
 <script>
 import ProfessorDataService from "../../services/ProfessorDataService";
+import MyButtons from "../UI/MyButtons.vue";
+import MyInputs from "../UI/MyInputs.vue";
 
 export default {
+  components: {
+    MyInputs,
+    MyButtons
+  },
   data() {
     return {
       currentProfessor: {

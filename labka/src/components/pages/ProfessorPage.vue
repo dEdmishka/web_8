@@ -1,25 +1,75 @@
 <template>
   <div>
     <h1>Page with professors</h1>
-    <professor-list
-        :professors="professors"
-        @remove="deleteProfessor($event)"
-    />
+    <my-table
+        :heads="heads"
+    >
+        <my-table-row
+            v-if="professors.length > 0"
+            v-for="professor in professors"
+            :key="professor.id"
+        >
+          <my-table-column>
+            {{ professor.p_name }}
+          </my-table-column>
+          <my-table-column>
+            {{ professor.p_email }}
+          </my-table-column>
+          <my-table-column>
+            {{ professor.p_password }}
+          </my-table-column>
+          <my-table-column>
+            <my-buttons
+                @click="$router.push(`/professors/${professor.id_p}`)"
+            >
+              Edit
+            </my-buttons>
+            <my-buttons
+                @click="deleteProfessor(professor)"
+            >
+              Delete
+            </my-buttons>
+          </my-table-column>
+        </my-table-row>
+    </my-table>
   </div>
 </template>
 
 <script>
 import AddProfessor from "../professor/AddProfessor.vue";
-import ProfessorList from "../professor/ProfessorList.vue";
 import ProfessorDataService from "../../services/ProfessorDataService";
+import MyTable from "../UI/MyTable.vue";
+import MyTableRow from "../UI/MyTableRow.vue";
+import MyTableColumn from "../UI/MyTableColumn.vue";
+import MyButtons from "../UI/MyButtons.vue";
 
 export default {
   components: {
-    ProfessorList,
+    MyButtons,
+    MyTableColumn,
+    MyTableRow,
+    MyTable,
     AddProfessor
   },
   data: () => ({
     professors: [],
+    heads: [
+      'name', 'email', 'password', 'actions'
+    ],
+    // subjects: [
+    //   {
+    //     id: 1,
+    //     name: "Name1",
+    //     email: "Email1",
+    //     password: "Password1",
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "Name2",
+    //     email: "Email2",
+    //     password: "Password2",
+    //   },
+    // ],
   }),
   computed: {},
   methods: {
@@ -35,6 +85,9 @@ export default {
           });
     },
     deleteProfessor(professor) {
+      // console.log(1)
+      // console.log(professor)
+      // console.log(professor.id_p)
       ProfessorDataService.delete(professor.id_p)
           .then(res => {
             alert('You have successfully deleted professor: ' + professor.p_name + ' !')

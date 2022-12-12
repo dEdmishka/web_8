@@ -27,6 +27,8 @@
           />
         </div>
 
+        <router-link to="/professors">Back</router-link>
+
         <my-buttons
             @click="createProfessor"
             class="btn btn-submit"
@@ -38,7 +40,12 @@
       <div v-else>
         <h4>You create professor successfully!</h4>
         <router-link to="/professors">Back</router-link>
-        <button class="btn btn-submit" @click="newProfessor">Add</button>
+        <my-buttons
+            class="btn btn-submit"
+            @click="newProfessor"
+        >
+          Add
+        </my-buttons>
       </div>
 
     </div>
